@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "uptime-robot"
+version = "0.1.0"
+description = ""
+authors = ["AlexanderHura <alexander_gura@ukr.net>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "uptime_robot"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "3.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

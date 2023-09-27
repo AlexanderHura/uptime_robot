@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./dockerfile
+    image: updatime_robot_django
+    container_name: updatime_robot_django
+    env_file: ".env"
+
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./:/app/
+
+  postgres:
+    image: postgres:13.3
+    restart: always
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    #env_file: ".env"
+    # environment:
+    #   - POSTGRES_HOST='postgres'
+    #   - POSTGRES_PORT='5432'
+    #   - POSTGRES_USER='postgres'
+    #   - POSTGRES_PASSWORD='postgres'
+    #   - POSTGRES_DB= 'uptime_robot'
+    #   - DATABASE_URL="postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}"
+
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis
+    container_name: updatime_robot_redis
+
+volumes:
+  pg_data: {}
